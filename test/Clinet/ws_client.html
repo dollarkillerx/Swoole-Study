@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WS Test</title>
+</head>
+<body>
+
+<h1>DollarkILLER ws TEST</h1>
+
+<script>
+    const WSURL = 'ws://172.17.0.2:9501';
+    let websocket = new WebSocket(WSURL);
+
+    // 实例化对象onopen属性
+    websocket.onopen = function (evt) {
+        websocket.send('hello-dollarkiller');
+        console.log('conected-swoole-success');
+    }
+    
+    // 实例化 onmessage
+    websocket.onmessage = function (evt) {
+        console.log('ws-server-return-data:'+ evt.data)
+    }
+
+    // 实例化 onclose
+    websocket.onclose = function (evt) {
+        console.log("close")
+    }
+
+    // onerror
+    websocket.onerror = function (evt,e) {
+        console.log('error' + e.data)
+
+    }
+</script>
+
+</body>
+</html>

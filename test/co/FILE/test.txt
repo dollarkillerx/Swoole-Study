@@ -1,0 +1,95 @@
+Swoole
+PHP-X
+输入要搜索的关键词
+
+入门指引
+Server
+Coroutine
+Coroutine
+Coroutine::set
+Coroutine::stats
+Coroutine::create
+Coroutine::exist
+Coroutine::getCid
+Coroutine::getPcid
+Coroutine::getContext
+Coroutine::defer
+Coroutine::list
+Coroutine::getBackTrace
+Coroutine::yield
+Coroutine::resume
+Coroutine::fread
+Coroutine::fgets
+Coroutine::fwrite
+Coroutine::sleep
+Coroutine::gethostbyname
+Coroutine::getaddrinfo
+Coroutine::exec
+Coroutine::readFile
+Coroutine::writeFile
+Coroutine::statvfs
+Coroutine\Channel
+Coroutine\Client
+Coroutine\Http\Client
+Coroutine\Http2\Client
+Coroutine\Redis
+Coroutine\Socket
+Coroutine\MySQL
+Coroutine\PostgreSQL
+Server
+并发调用
+实现原理
+常见问题
+编程须知
+扩展组件
+编程调试
+Runtime
+Timer
+Memory
+Http\Server
+WebSocket\Server
+Redis\Server
+Process
+Process\Pool
+Client
+Event
+异步回调
+高级
+其他
+
+Coroutine::fread
+协程方式读取文件。
+
+function Coroutine::fread(resource $handle, int $length = 0);
+需要2.0.11或更高版本
+
+参数
+$handle文件句柄，必须是fopen打开的文件类型stream资源
+$length读取的长度，默认为0，表示读取文件的全部内容
+返回值
+读取成功返回字符串内容，读取失败返回false
+
+版本差异
+4.0.4以下版本fread方法不支持非文件类型的stream，如STDIN、Socket，请勿使用fread操作此类资源。
+
+4.0.4以上版本fread方法支持了非文件类型的stream资源，底层会自动根据stream类型选择使用AIO线程池或EventLoop实现。
+
+示例
+use Swoole\Coroutine as co;
+$fp = fopen(__DIR__ . "/defer_client.php", "r");
+co::create(function () use ($fp)
+{
+    fseek($fp, 256);
+    $r =  co::fread($fp);
+    var_dump($r);
+});
+参数
+返回值
+版本差异
+示例
+最新最早最热
+4781次阅读 0条评论
+
+[登录后发表评论]
+
+© Swoole.com 2008 - 2019 备案号：京ICP备14049466号-7 | 版权声明 官方QQ群：399424487 开发组邮件列表： team@swoole.com 当前Swoole扩展版本：swoole-4.2.5
